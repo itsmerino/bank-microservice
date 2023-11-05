@@ -1,0 +1,199 @@
+openapi: 3.0.3
+info:
+  title: Bank Microservice
+  description: Bank Microservice
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api'
+paths:
+  /users:
+    post:
+      description: Create user
+      requestBody:
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserBody'
+      responses:
+        '201':
+          $ref: '#/components/responses/CreateUserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+  /wallets:
+    post:
+      description: Create wallet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWalletBody'
+      responses:
+        '201':
+          $ref: '#/components/responses/CreateWalletResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+  /wallets/{walletId}:
+    get:
+      description: Get wallet information by ID
+      parameters:
+        - in: path
+          name: walletId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GetWalletInfoResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+  /wallets/deposit:
+    post:
+      description: Deposit funds
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositFundsBody'
+      responses:
+        '204':
+          description: Deposit made
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+  /wallets/transfer:
+    post:
+      description: Transfer funds
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferFundsBody'
+      responses:
+        '204':
+          description: Transfer made
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+components:
+  responses:
+    CreateUserResponse:
+      description: User details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateUser'
+    CreateWalletResponse:
+      description: Wallet details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateWallet'
+    GetWalletInfoResponse:
+      description: Wallet balance and movements
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetWalletInfo'
+    BadRequestResponse:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CreateUserBody:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+    CreateUser:
+      type: object
+      required:
+        - id
+        - username
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+    CreateWalletBody:
+      type: object
+      required:
+        - userId
+        - address
+        - privateKey
+      properties:
+        userId:
+          type: string
+        address:
+          type: string
+        privateKey:
+          type: string
+    CreateWallet:
+      type: object
+      required:
+        - id
+        - userId
+        - address
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        address:
+          type: string
+    GetWalletInfo:
+      type: object
+      required:
+        - balance
+        - movements
+      properties:
+        balance:
+          type: integer
+        movements:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+              walletFrom:
+                type: string
+              walletTo:
+                type: string
+              amount:
+                type: integer
+              date:
+                type: string
+    DepositFundsBody:
+      type: object
+      required:
+        - walletId
+        - amount
+      properties:
+        walletId:
+          type: string
+        amount:
+          type: integer
+    TransferFundsBody:
+      type: object
+      required:
+        - walletFrom
+        - walletTo
+        - amount
+      properties:
+        walletFrom:
+          type: string
+        walletTo:
+          type: string
+        amount:
+          type: integer
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
