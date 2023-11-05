@@ -1,5 +1,5 @@
 web3:
-  url: http://localhost:7545
+  url: http://localhost:8545
   contract:
     privateKey: "0x43abfb95594ef626f802854c79c0712f91d5c8abaa1361c25f1b84a75bdbc91e"
   wallet1:
