@@ -1,0 +1,17 @@
+web3:
+  url: http://localhost:7545
+  contract:
+    privateKey: "0x43abfb95594ef626f802854c79c0712f91d5c8abaa1361c25f1b84a75bdbc91e"
+  wallet1:
+    address: "0xD07aC32745373adFb9066e99f6d28Ece4bD47aDF"
+    privateKey: "0xd45314015ff29662462100da9ca940c9718ac617341846d39c71f6754bd31a84"
+  wallet2:
+    address: "0x4aF7Fab34ce81A789402ba23e3f8491f705AaBFB"
+    privateKey: "0x1db505b3af6e21a74c7751a075c69de61ab26e59b3dd45e7d7d9a542aad7547e"
+  wallet3:
+    address: "0x2462AAd4BB257921c03C4c6782E283c791F45B89"
+    privateKey: "0x943a51a17e286db9f0a67a9588f1e5541f8daa54e4dd7a5ac2655bac5329b4bd"
+server:
+  servlet:
+    context-path: /api
+  port: 8080
