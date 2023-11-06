@@ -55,7 +55,7 @@ paths:
             schema:
               $ref: '#/components/schemas/DepositFundsBody'
       responses:
-        '204':
+        '200':
           description: Deposit made
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -68,7 +68,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TransferFundsBody'
       responses:
-        '204':
+        '200':
           description: Transfer made
         '400':
           $ref: '#/components/responses/BadRequestResponse'

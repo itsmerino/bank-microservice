@@ -83,11 +83,11 @@ public class AcceptanceTest {
 
     @Then("the deposit is done successfully")
     public void theDepositIsDoneSuccessfully() {
-        assertEquals(HttpStatus.NO_CONTENT.value(), lastResponse.statusCode());
+        assertEquals(HttpStatus.OK.value(), lastResponse.statusCode());
     }
 
     @Then("the transfer is done successfully")
     public void theTransferIsDoneSuccessfully() {
-        assertEquals(HttpStatus.NO_CONTENT.value(), lastResponse.statusCode());
+        assertEquals(HttpStatus.OK.value(), lastResponse.statusCode());
     }
 }

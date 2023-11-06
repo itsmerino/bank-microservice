@@ -88,7 +88,7 @@ class WalletControllerTest {
 
         HttpResponse<String> depositFundsResponse = walletClient.depositFunds(createWalletResponse.getId(), 1);
 
-        assertEquals(HttpStatus.NO_CONTENT.value(), depositFundsResponse.statusCode());
+        assertEquals(HttpStatus.OK.value(), depositFundsResponse.statusCode());
     }
 
     @Test
@@ -106,7 +106,7 @@ class WalletControllerTest {
         walletClient.depositFunds(createWalletOneResponse.getId(), 1);
         HttpResponse<String> transferFundsResponse = walletClient.transferFunds(createWalletOneResponse.getId(), createWalletTwoResponse.getId(), 1);
 
-        assertEquals(HttpStatus.NO_CONTENT.value(), transferFundsResponse.statusCode());
+        assertEquals(HttpStatus.OK.value(), transferFundsResponse.statusCode());
     }
 
     @Test

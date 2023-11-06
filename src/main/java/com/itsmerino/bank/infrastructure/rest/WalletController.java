@@ -63,7 +63,7 @@ public class WalletController {
         Optional.ofNullable(conversionService.convert(depositFundsBody, DepositFundsRequest.class))
                 .ifPresent(depositFundsUseCase::handle);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/transfer")
@@ -71,6 +71,6 @@ public class WalletController {
         Optional.ofNullable(conversionService.convert(transferFundsBody, TransferFundsRequest.class))
                 .ifPresent(transferFundsUseCase::handle);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
