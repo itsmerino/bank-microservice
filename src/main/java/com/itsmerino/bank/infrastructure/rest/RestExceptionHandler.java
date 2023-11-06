@@ -35,57 +35,38 @@ public class RestExceptionHandler {
             MethodArgumentTypeMismatchException.class
     })
     public ResponseEntity<ErrorResponse> handleInvalidArgumentException() {
-        String message = getMessage("invalid-argument");
-        ErrorResponse errorResponse = buildErrorResponse(message);
-
-        return ResponseEntity.badRequest().body(errorResponse);
+        return buildBadRequestResponse("invalid-argument");
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<ErrorResponse> handleUsernameAlreadyExistsException() {
-        String message = getMessage("users.username-already-exists");
-        ErrorResponse errorResponse = buildErrorResponse(message);
-
-        return ResponseEntity.badRequest().body(errorResponse);
+        return buildBadRequestResponse("users.username-already-exists");
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFoundException() {
-        String message = getMessage("users.not-found");
-        ErrorResponse errorResponse = buildErrorResponse(message);
-
-        return ResponseEntity.badRequest().body(errorResponse);
+        return buildBadRequestResponse("users.not-found");
     }
 
     @ExceptionHandler(WalletNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleWalletNotFoundException() {
-        String message = getMessage("wallets.not-found");
-        ErrorResponse errorResponse = buildErrorResponse(message);
-
-        return ResponseEntity.badRequest().body(errorResponse);
+        return buildBadRequestResponse("wallets.not-found");
     }
 
     @ExceptionHandler(CanNotTransferToSameWalletException.class)
     public ResponseEntity<ErrorResponse> handleSameWalletException() {
-        String message = getMessage("wallets.same-wallet");
-        ErrorResponse errorResponse = buildErrorResponse(message);
-
-        return ResponseEntity.badRequest().body(errorResponse);
+        return buildBadRequestResponse("wallets.same-wallet");
     }
 
     @ExceptionHandler(InsufficientFundsException.class)
     public ResponseEntity<ErrorResponse> handleInsufficientFundsException() {
-        String message = getMessage("wallets.insufficient-funds");
-        ErrorResponse errorResponse = buildErrorResponse(message);
+        return buildBadRequestResponse("wallets.insufficient-funds");
+    }
+
+    private ResponseEntity<ErrorResponse> buildBadRequestResponse(String i18n) {
+        String message = messageSource.getMessage(i18n, new Object[]{}, Locale.getDefault());
+        ErrorResponse errorResponse = conversionService.convert(message, ErrorResponse.class);
 
         return ResponseEntity.badRequest().body(errorResponse);
-    }
-
-    private String getMessage(String message) {
-        return messageSource.getMessage(message, new Object[]{}, Locale.getDefault());
-    }
-
-    private ErrorResponse buildErrorResponse(String message) {
-        return conversionService.convert(message, ErrorResponse.class);
     }
 }
