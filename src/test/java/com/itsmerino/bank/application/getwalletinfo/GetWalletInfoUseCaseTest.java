@@ -28,7 +28,7 @@ class GetWalletInfoUseCaseTest {
     private final GetWalletInfoUseCase sut = new GetWalletInfoUseCase(conversionService, movementPort, walletPort);
 
     @Test
-    void itShouldDepositFunds() {
+    void itShouldGetWalletInfo() {
         UUID walletId = UUID.randomUUID();
         Wallet wallet = WalletMother.random();
         Movement movement = MovementMother.random();

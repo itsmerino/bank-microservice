@@ -28,7 +28,7 @@ class TransferFundsUseCaseTest {
     private final TransferFundsUseCase sut = new TransferFundsUseCase(conversionService, movementPort, transferPort, walletPort);
 
     @Test
-    void itShouldDepositFunds() {
+    void itShouldTransferFunds() {
         Wallet walletFrom = WalletMother.random();
         Wallet walletTo = WalletMother.random();
         Movement movement = MovementMother.random();
